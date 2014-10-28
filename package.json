@@ -1,0 +1,25 @@
+{
+  "name":        "stats-webpack-plugin",
+  "description": "Write the stats of a build to a file.",
+  "version":     "0.0.1",
+
+  "author": {
+    "name":  "Daniel Perez Alvarez",
+    "email": "unindented@gmail.com",
+    "url":   "http://unindented.org/"
+  },
+
+  "repository": {
+    "type": "git",
+    "url":  "git://github.com/unindented/stats-webpack-plugin.git"
+  },
+
+  "keywords": [
+    "stats",
+    "webpack"
+  ],
+
+  "peerDependencies": {
+    "webpack": "^1.4.2"
+  }
+}
