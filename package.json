@@ -28,6 +28,7 @@
   },
 
   "devDependencies": {
-    "nodeunit": "^0.9"
+    "nodeunit": "^0.9",
+    "webpack":  "^1.0"
   }
 }
