@@ -1,5 +1,4 @@
-var fs   = require('fs');
-var path = require('path');
+var fs = require('fs');
 
 var StatsPlugin = function (output, options) {
   this.output  = output;

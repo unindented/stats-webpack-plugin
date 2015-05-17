@@ -1,4 +1,4 @@
-# Stats plugin for webpack
+# Stats plugin for webpack [![Build Status](https://img.shields.io/travis/unindented/stats-webpack-plugin.svg)](http://travis-ci.org/unindented/stats-webpack-plugin) [![Dependency Status](https://img.shields.io/gemnasium/unindented/stats-webpack-plugin.svg)](https://gemnasium.com/unindented/stats-webpack-plugin)
 
 Writes the stats of a build to a file.
 

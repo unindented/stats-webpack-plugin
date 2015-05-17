@@ -19,7 +19,15 @@
     "webpack"
   ],
 
+  "scripts": {
+    "test": "./node_modules/.bin/nodeunit test/plugin.js"
+  },
+
   "peerDependencies": {
-    "webpack": "^1.4.2"
+    "webpack": "^1.0"
+  },
+
+  "devDependencies": {
+    "nodeunit": "^0.9"
   }
 }
