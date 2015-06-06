@@ -32,9 +32,10 @@
   },
 
   "devDependencies": {
-    "lodash-node": "^3.0",
-    "nodeunit":    "^0.9",
-    "rimraf":      "^2.0",
-    "webpack":     "^1.0"
+    "lodash-node":       "^3.0",
+    "node-libs-browser": "^0.5",
+    "nodeunit":          "^0.9",
+    "rimraf":            "^2.0",
+    "webpack":           "^1.0"
   }
 }
