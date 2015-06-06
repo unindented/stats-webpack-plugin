@@ -1,4 +1,6 @@
 var fs = require('fs');
+var mkdirp = require('mkdirp');
+var path = require('path');
 
 var StatsPlugin = function (output, options) {
   this.output  = output;
@@ -10,6 +12,7 @@ StatsPlugin.prototype.apply = function (compiler) {
   var options = this.options;
 
   compiler.plugin('done', function (stats) {
+    mkdirp.sync(path.dirname(output));
     fs.writeFileSync(output, JSON.stringify(stats.toJson(options)));
   });
 };

@@ -27,8 +27,14 @@
     "webpack": "^1.0"
   },
 
+  "dependencies": {
+    "mkdirp": "^0.5"
+  },
+
   "devDependencies": {
-    "nodeunit": "^0.9",
-    "webpack":  "^1.0"
+    "lodash-node": "^3.0",
+    "nodeunit":    "^0.9",
+    "rimraf":      "^2.0",
+    "webpack":     "^1.0"
   }
 }
