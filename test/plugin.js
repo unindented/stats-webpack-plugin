@@ -1,4 +1,4 @@
-var clone = require('lodash-node/modern/lang/clone');
+var clone = require('lodash/lang/clone');
 var fs = require('fs');
 var path = require('path');
 var rimraf = require('rimraf');
