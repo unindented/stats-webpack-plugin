@@ -28,7 +28,7 @@ var defaultCompilerOptions = {
   plugins: [
     new StatsPlugin(outputFile, options)
   ]
-}
+};
 
 module.exports.test = {
 
@@ -46,7 +46,7 @@ module.exports.test = {
     // Ensure the output folder does not exist
     rimraf.sync(newOutputFolder);
 
-    var compilerOptions = clone(defaultCompilerOptions, /* isDeep */ true);
+    var compilerOptions = clone(defaultCompilerOptions, true);
     compilerOptions.output.path = newOutputFolder;
     compilerOptions.plugins = [
       new StatsPlugin(newOutputFile, options)
@@ -60,4 +60,5 @@ module.exports.test = {
       test.done();
     });
   }
+
 };
