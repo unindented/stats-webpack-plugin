@@ -4,6 +4,7 @@ var path = require('path');
 var rimraf = require('rimraf');
 var webpack = require('webpack');
 var StatsPlugin = require('../');
+var chai = require('chai');
 
 var inputFolder = path.join(__dirname, 'fixtures');
 var inputFile = path.join(inputFolder, 'entry.js');
@@ -11,6 +12,8 @@ var outputFolder = path.join(__dirname, 'output');
 var outputFile = path.join(outputFolder, 'stats.json');
 var newOutputFolder = path.join(__dirname, 'new-output');
 var newOutputFile = path.join(newOutputFolder, 'stats.json');
+
+var expect = chai.expect;
 
 var options = {
   chunkModules: true,
@@ -25,24 +28,25 @@ var defaultCompilerOptions = {
     filename: 'bundle.js'
   },
 
+  profile: true,
+
   plugins: [
     new StatsPlugin(outputFile, options)
   ]
 };
 
-module.exports.test = {
-
-  'generates `stats.json` file': function (test) {
+it('generates `stats.json` file', function(done) {
     var compiler = webpack(defaultCompilerOptions);
     compiler.run(function (err, stats) {
-      var expected = JSON.stringify(stats.toJson(options));
-      var actual = fs.readFileSync(outputFile);
-      test.equal(actual, expected);
-      test.done();
+      var expected = stats.toJson(options);
+      var actual = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
+      delete expected.time;
+      expect(actual).to.deep.equal(expected);
+      done();
     });
-  },
+});
 
-  'creates directories if they do not exist': function (test) {
+it('creates directories if they do not exist', function(done) {
     // Ensure the output folder does not exist
     rimraf.sync(newOutputFolder);
 
@@ -54,11 +58,10 @@ module.exports.test = {
 
     var compiler = webpack(compilerOptions);
     compiler.run(function (err, stats) {
-      var expected = JSON.stringify(stats.toJson(options));
-      var actual = fs.readFileSync(newOutputFile);
-      test.equal(actual, expected);
-      test.done();
+      var expected = stats.toJson(options);
+      var actual = JSON.parse(fs.readFileSync(newOutputFile, 'utf8'));
+      delete expected.time;
+      expect(actual).to.deep.equal(expected);
+      done();
     });
-  }
-
-};
+});
