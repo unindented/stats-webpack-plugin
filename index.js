@@ -1,3 +1,11 @@
+
+/**
+ * Create a new StatsPlugin that causes webpack to generate a stats file as
+ * part of the emitted assets.
+ * @constructor
+ * @param {String} output Path to output file.
+ * @param {Object} options Options passed to the stats' `.toJson()`.
+ */
 function StatsPlugin(output, options) {
   this.output = output;
   this.options = options;
