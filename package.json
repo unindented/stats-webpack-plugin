@@ -20,7 +20,9 @@
   ],
 
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "spec": "./node_modules/.bin/mocha",
+    "lint": "./node_modules/.bin/eslint .",
+    "test": "npm run lint && npm run spec"
   },
 
   "peerDependencies": {
@@ -32,6 +34,7 @@
     "mocha":             "^2.2",
     "chai":              "^3.0",
     "rimraf":            "^2.0",
-    "webpack":           "^1.0"
+    "webpack":           "^1.0",
+    "eslint":            "^0.24"
   }
 }

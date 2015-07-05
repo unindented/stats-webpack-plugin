@@ -1,16 +1,18 @@
-var StatsPlugin = function (output, options) {
-  this.output  = output;
+function StatsPlugin(output, options) {
+  this.output = output;
   this.options = options;
-};
+}
 
-StatsPlugin.prototype.apply = function (compiler) {
-  var output  = this.output;
+StatsPlugin.prototype.apply = function apply(compiler) {
+  var output = this.output;
   var options = this.options;
 
-  compiler.plugin('emit', function (compilation, done) {
+  compiler.plugin('emit', function onEmit(compilation, done) {
     compilation.assets[output] = {
-      size: function() { return 0 },
-      source: function() {
+      size: function getSize() {
+        return 0;
+      },
+      source: function getSource() {
         return JSON.stringify(compilation.getStats().toJson(options));
       }
     };
