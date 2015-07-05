@@ -45,10 +45,10 @@ describe('StatsWebpackPlugin', function() {
           var actual = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
           delete expected.time;
           for (var i = 0; i < expected.assets.length; ++i) {
-              if (expected.assets[i].name === 'stats.json') {
-                  delete expected.assets[i].emitted;
-                  break;
-              }
+            if (expected.assets[i].name === 'stats.json') {
+              delete expected.assets[i].emitted;
+              break;
+            }
           }
           expect(actual).to.deep.equal(expected);
           done();

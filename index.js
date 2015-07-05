@@ -9,10 +9,10 @@ StatsPlugin.prototype.apply = function (compiler) {
 
   compiler.plugin('emit', function (compilation, done) {
     compilation.assets[output] = {
-        size: function() { return 0 },
-        source: function() {
-            return JSON.stringify(compilation.getStats().toJson(options));
-        }
+      size: function() { return 0 },
+      source: function() {
+        return JSON.stringify(compilation.getStats().toJson(options));
+      }
     };
     done();
   });
