@@ -1,4 +1,3 @@
-var clone = require('lodash/lang/clone');
 var fs = require('fs');
 var path = require('path');
 var rimraf = require('rimraf');

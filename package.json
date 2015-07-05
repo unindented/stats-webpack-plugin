@@ -28,7 +28,6 @@
   },
 
   "devDependencies": {
-    "lodash":            "^3.0",
     "node-libs-browser": "^0.5",
     "mocha":             "^2.2",
     "chai":              "^3.0",
