@@ -20,22 +20,21 @@
   ],
 
   "scripts": {
-    "test": "./node_modules/.bin/nodeunit test/plugin.js"
+    "spec": "./node_modules/.bin/mocha",
+    "lint": "./node_modules/.bin/eslint .",
+    "test": "npm run lint && npm run spec"
   },
 
   "peerDependencies": {
     "webpack": "^1.0"
   },
 
-  "dependencies": {
-    "mkdirp": "^0.5"
-  },
-
   "devDependencies": {
-    "lodash":            "^3.0",
     "node-libs-browser": "^0.5",
-    "nodeunit":          "^0.9",
+    "mocha":             "^2.2",
+    "chai":              "^3.0",
     "rimraf":            "^2.0",
-    "webpack":           "^1.0"
+    "webpack":           "^1.0",
+    "eslint":            "^0.24"
   }
 }
