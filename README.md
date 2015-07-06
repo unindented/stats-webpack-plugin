@@ -45,6 +45,7 @@ new StatsPlugin(filename: string, [options])
 ## Contributors
 
 * Daniel Perez Alvarez ([unindented@gmail.com](mailto:unindented@gmail.com))
+* Izaak Schroeder ([izaak.schroeder@gmail.com](mailto:izaak.schroeder@gmail.com))
 
 
 ## License
