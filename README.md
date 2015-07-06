@@ -17,7 +17,7 @@ var StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
   plugins: [
-    new StatsPlugin(path.join(__dirname, 'build', 'stats.json'), {
+    new StatsPlugin('stats.json', {
       chunkModules: true,
       exclude: [/node_modules[\\\/]react/]
     })
