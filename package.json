@@ -30,11 +30,13 @@
   },
 
   "devDependencies": {
-    "node-libs-browser": "^0.5",
-    "mocha":             "^2.3",
-    "chai":              "^3.3",
-    "rimraf":            "^2.4",
-    "webpack":           "^1.12",
-    "eslint":            "^1.5"
+    "node-libs-browser":      "^0.5",
+    "mocha":                  "^2.3",
+    "chai":                   "^3.3",
+    "rimraf":                 "^2.4",
+    "webpack":                "^1.12",
+    "eslint":                 "^1.5",
+    "eslint-config-standard": "^4.4",
+    "eslint-plugin-standard": "^1.3"
   }
 }
