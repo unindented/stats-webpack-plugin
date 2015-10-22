@@ -29,11 +29,11 @@ module.exports = {
 ## API
 
 ```js
-new StatsPlugin(filename: string, [options])
+new StatsPlugin(path: string, [options])
 ```
 
-* `filename` the filename of the result file.
-* `options` options passed to [stats.toJson](http://webpack.github.io/docs/node.js-api.html#stats-tojson)
+* `path`: The path of the result file, relative to your output folder.
+* `options`: Options passed to [stats.toJson](http://webpack.github.io/docs/node.js-api.html#stats-tojson)
 
 
 ## Meta
@@ -50,4 +50,4 @@ new StatsPlugin(filename: string, [options])
 
 ## License
 
-Copyright (c) 2014 Daniel Perez Alvarez ([unindented.org](http://unindented.org/)). This is free software, and may be redistributed under the terms specified in the LICENSE file.
+Copyright (c) 2014 Daniel Perez Alvarez ([unindented.org](https://unindented.org/)). This is free software, and may be redistributed under the terms specified in the LICENSE file.
