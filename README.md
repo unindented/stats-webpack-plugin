@@ -29,11 +29,11 @@ module.exports = {
 ## API
 
 ```js
-new StatsPlugin(filename: string, [options])
+new StatsPlugin(path: string, [options])
 ```
 
-* `filename` the filename of the result file.
-* `options` options passed to [stats.toJson](http://webpack.github.io/docs/node.js-api.html#stats-tojson)
+* `path`: The path of the result file, relative to your output folder.
+* `options`: Options passed to [stats.toJson](http://webpack.github.io/docs/node.js-api.html#stats-tojson)
 
 
 ## Meta
