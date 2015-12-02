@@ -15,12 +15,14 @@ StatsPlugin.prototype.apply = function apply (compiler) {
   var options = this.options
 
   compiler.plugin('emit', function onEmit (compilation, done) {
+    const source = JSON.stringify(compilation.getStats().toJson(options))
+
     compilation.assets[output] = {
       size: function getSize () {
-        return 0
+        return source.length
       },
       source: function getSource () {
-        return JSON.stringify(compilation.getStats().toJson(options))
+        return source
       }
     }
     done()
