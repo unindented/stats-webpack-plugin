@@ -3,14 +3,14 @@ var path = require('path')
 var rimraf = require('rimraf')
 var webpack = require('webpack')
 var StatsPlugin = require('../')
+
 var chai = require('chai')
-
-var inputFolder = path.join(__dirname, 'fixtures')
-var inputFile = path.join(inputFolder, 'entry.js')
-var outputFolder = path.join(__dirname, 'output')
-var outputFile = path.join(outputFolder, 'stats.json')
-
 var expect = chai.expect
+
+var inputFolder = path.resolve(__dirname, 'fixtures')
+var inputFile = path.resolve(inputFolder, 'entry.js')
+var outputFolder = path.resolve(__dirname, 'output')
+var outputFile = path.resolve(outputFolder, 'stats.json')
 
 var options = {
   chunkModules: true,
@@ -34,7 +34,6 @@ var defaultCompilerOptions = {
 
 describe('StatsWebpackPlugin', function () {
   beforeEach(function () {
-    // Ensure the output folder does not exist
     rimraf.sync(outputFolder)
   })
 
@@ -42,20 +41,26 @@ describe('StatsWebpackPlugin', function () {
     var compiler = webpack(defaultCompilerOptions)
     compiler.run(function (err, stats) {
       if (err) {
-        done(err)
-      } else {
-        var expected = stats.toJson(options)
-        var actual = JSON.parse(fs.readFileSync(outputFile, 'utf8'))
-        delete expected.time
-        for (var i = 0; i < expected.assets.length; ++i) {
-          if (expected.assets[i].name === 'stats.json') {
-            delete expected.assets[i].emitted
-            break
-          }
-        }
-        expect(actual).to.deep.equal(expected)
-        done()
+        return done(err)
       }
+
+      var actual = JSON.parse(fs.readFileSync(outputFile, 'utf8'))
+      var expected = stats.toJson(options)
+
+      // Delete variable timing info.
+      delete expected.time
+
+      // Delete mismatched info.
+      for (var i = 0, l = expected.assets.length; i < l; ++i) {
+        if (expected.assets[i].name === 'stats.json') {
+          delete expected.assets[i].emitted
+          expected.assets[i].size = 0
+          break
+        }
+      }
+
+      expect(actual).to.deep.equal(expected)
+      done()
     })
   })
 })
