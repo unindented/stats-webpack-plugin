@@ -16,8 +16,8 @@
     "webpack"
   ],
   "scripts": {
-    "spec": "./node_modules/.bin/mocha",
-    "lint": "./node_modules/.bin/eslint .",
+    "spec": "mocha",
+    "lint": "eslint .",
     "test": "npm run lint && npm run spec"
   },
   "peerDependencies": {
