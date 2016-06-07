@@ -25,6 +25,8 @@ module.exports = {
 };
 ```
 
+Give webpack the `--profile` flag or set `profile: true` in `webpack.config` to get detailed timing measurements.
+See [Webpack Profiling](https://webpack.github.io/docs/cli.html#profiling) for more detail.
 
 ## API
 
