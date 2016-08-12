@@ -22,7 +22,7 @@
     "test": "npm run lint && npm run spec"
   },
   "peerDependencies": {
-    "webpack": "^1.0"
+    "webpack": "^1.0|| ^2.1.0-beta"
   },
   "devDependencies": {
     "chai": "^3.3",
@@ -33,6 +33,6 @@
     "mocha": "^3.0.2",
     "node-libs-browser": "^1.0.0",
     "rimraf": "^2.4",
-    "webpack": "^1.12 || ^2.1.0-beta"
+    "webpack": "^1.12"
   }
 }
