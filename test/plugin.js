@@ -14,7 +14,7 @@ var outputFile = path.resolve(outputFolder, 'stats.json')
 
 var options = {
   chunkModules: true,
-  exclude: [/node_modules[\\\/]/]
+  exclude: [/node_modules[\\/]/]
 }
 
 var defaultCompilerOptions = {
