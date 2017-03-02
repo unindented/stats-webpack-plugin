@@ -32,7 +32,7 @@ var defaultCompilerOptions = {
   ]
 }
 
-var mulitCompilerOptions = (cache) => [{
+var multiCompilerOptions = (cache) => [{
   entry: {
     file1: inputFile
   },
@@ -98,7 +98,7 @@ describe('StatsWebpackPlugin', function () {
 
   it('supports multi-compile mode and outputs one `stats.json` file', function (done) {
     var cache = {}
-    var compiler = webpack(mulitCompilerOptions(cache))
+    var compiler = webpack(multiCompilerOptions(cache))
     compiler.run(function (err, stats) {
       if (err) {
         return done(err)
