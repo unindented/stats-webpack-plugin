@@ -1,3 +1,5 @@
+var _ = require('lodash')
+
 /**
  * Create a new StatsPlugin that causes webpack to generate a stats file as
  * part of the emitted assets.
@@ -5,14 +7,16 @@
  * @param {String} output Path to output file.
  * @param {Object} options Options passed to the stats' `.toJson()`.
  */
-function StatsPlugin (output, options) {
+function StatsPlugin (output, options, cache) {
   this.output = output
   this.options = options
+  this.cache = cache || {}
 }
 
 StatsPlugin.prototype.apply = function apply (compiler) {
   var output = this.output
   var options = this.options
+  var cache = this.cache
 
   compiler.plugin('emit', function onEmit (compilation, done) {
     var result
@@ -22,7 +26,9 @@ StatsPlugin.prototype.apply = function apply (compiler) {
         return result && result.length || 0
       },
       source: function getSource () {
-        result = JSON.stringify(compilation.getStats().toJson(options))
+        var stats = compilation.getStats().toJson(options)
+        cache = _.merge(cache, stats)
+        result = JSON.stringify(cache)
         return result
       }
     }
