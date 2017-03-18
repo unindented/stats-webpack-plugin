@@ -7,10 +7,11 @@ var _ = require('lodash')
  * @param {String} output Path to output file.
  * @param {Object} options Options passed to the stats' `.toJson()`.
  */
+
 function StatsPlugin (output, options, cache) {
   this.output = output
   this.options = options
-  this.cache = cache || {}
+  this.cache = cache
 }
 
 StatsPlugin.prototype.apply = function apply (compiler) {
@@ -27,8 +28,14 @@ StatsPlugin.prototype.apply = function apply (compiler) {
       },
       source: function getSource () {
         var stats = compilation.getStats().toJson(options)
-        cache = _.merge(cache, stats)
-        result = JSON.stringify(cache)
+        var result
+
+        if (cache) {
+          cache = _.merge(cache, stats)
+          result = JSON.stringify(cache)
+        } else {
+          result = JSON.stringify(stats)
+        }
         return result
       }
     }
