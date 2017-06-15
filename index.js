@@ -32,6 +32,8 @@ StatsPlugin.prototype.apply = function apply (compiler) {
 
         if (cache) {
           cache = _.merge(cache, stats)
+          if (stats.errors) cache.errors = stats.errors
+          if (stats.warnings) cache.warnings = stats.warnings
           result = JSON.stringify(cache)
         } else {
           result = JSON.stringify(stats)
