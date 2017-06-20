@@ -20,11 +20,11 @@ StatsPlugin.prototype.apply = function apply (compiler) {
   var cache = this.cache
 
   compiler.plugin('emit', function onEmit (compilation, done) {
-    var result
+    var resultStored
 
     compilation.assets[output] = {
       size: function getSize () {
-        return result && result.length || 0
+        return resultStored && resultStored.length || 0
       },
       source: function getSource () {
         var stats = compilation.getStats().toJson(options)
@@ -38,6 +38,7 @@ StatsPlugin.prototype.apply = function apply (compiler) {
         } else {
           result = JSON.stringify(stats)
         }
+        resultStored = result
         return result
       }
     }
