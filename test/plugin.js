@@ -14,7 +14,8 @@ var outputFile = path.resolve(outputFolder, 'stats.json')
 
 var options = {
   chunkModules: true,
-  exclude: [/node_modules[\\/]/]
+  exclude: [/node_modules[\\/]/],
+  performance: false // remove isOverSizeLimit check which gets set to undefined in webpack3
 }
 
 var defaultCompilerOptions = {
@@ -88,6 +89,14 @@ describe('StatsWebpackPlugin', function () {
           delete expected.assets[i].emitted
           expected.assets[i].size = 0
           break
+        }
+      }
+
+      for (var j = 0, k = expected.chunks.length; j < k; ++j) {
+        if (!expected.chunks[j].recorded) {
+          // recorded can only ever be true or undefined but it only shows up in
+          // stats when it's true so remove it if it's undefined
+          delete expected.chunks[j].recorded
         }
       }
 
