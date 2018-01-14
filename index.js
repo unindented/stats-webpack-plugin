@@ -20,24 +20,23 @@ StatsPlugin.prototype.apply = function apply (compiler) {
   var cache = this.cache
 
   compiler.plugin('emit', function onEmit (compilation, done) {
+    var stats = compilation.getStats().toJson(options)
     var result
+
+    if (cache) {
+      cache = _.merge(cache, stats)
+      if (stats.errors) cache.errors = stats.errors
+      if (stats.warnings) cache.warnings = stats.warnings
+      result = JSON.stringify(cache)
+    } else {
+      result = JSON.stringify(stats)
+    }
 
     compilation.assets[output] = {
       size: function getSize () {
         return result && result.length || 0
       },
       source: function getSource () {
-        var stats = compilation.getStats().toJson(options)
-        var result
-
-        if (cache) {
-          cache = _.merge(cache, stats)
-          if (stats.errors) cache.errors = stats.errors
-          if (stats.warnings) cache.warnings = stats.warnings
-          result = JSON.stringify(cache)
-        } else {
-          result = JSON.stringify(stats)
-        }
         return result
       }
     }
