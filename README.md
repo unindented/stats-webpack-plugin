@@ -6,7 +6,7 @@ Writes the stats of a build to a file.
 ## Installation
 
 ```sh
-$ npm install --save stats-webpack-plugin
+$ npm install --save-dev stats-webpack-plugin
 ```
 
 
