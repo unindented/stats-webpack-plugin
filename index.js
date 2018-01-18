@@ -24,7 +24,7 @@ StatsPlugin.prototype.apply = function apply (compiler) {
 
     compilation.assets[output] = {
       size: function getSize () {
-        return result && result.length || 0
+        return result ? result.length : 0
       },
       source: function getSource () {
         var stats = compilation.getStats().toJson(options)
