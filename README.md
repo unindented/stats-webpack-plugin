@@ -35,7 +35,7 @@ new StatsPlugin(path: string, [options])
 ```
 
 * `path`: The path of the result file, relative to your output folder.
-* `options`: Options passed to [stats.toJson](http://webpack.github.io/docs/node.js-api.html#stats-tojson)
+* `options`: Options passed to [stats.toJson](https://webpack.js.org/api/node/#stats-object)
 
 
 ## Meta
