@@ -19,7 +19,7 @@ StatsPlugin.prototype.apply = function apply (compiler) {
   var options = this.options
   var cache = this.cache
 
-  compiler.plugin('emit', function onEmit (compilation, done) {
+  function onEmit (compilation, done) {
     var result
 
     compilation.assets[output] = {
@@ -42,7 +42,13 @@ StatsPlugin.prototype.apply = function apply (compiler) {
       }
     }
     done()
-  })
+  }
+
+  if (compiler.hooks) {
+    compiler.hooks.emit.tapAsync({ name: 'StatsPlugin' }, onEmit)
+  } else {
+    compiler.plugin('emit', onEmit)
+  }
 }
 
 module.exports = StatsPlugin
