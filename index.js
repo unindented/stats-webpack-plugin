@@ -14,6 +14,12 @@ function StatsPlugin (output, options, cache) {
   this.cache = cache
 }
 
+function mergeCustomizer (objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return _.unionWith(objValue, srcValue, _.isEqual)
+  }
+}
+
 StatsPlugin.prototype.apply = function apply (compiler) {
   var output = this.output
   var options = this.options
@@ -31,7 +37,7 @@ StatsPlugin.prototype.apply = function apply (compiler) {
         var result
 
         if (cache) {
-          cache = _.merge(cache, stats)
+          cache = _.mergeWith(cache, stats, mergeCustomizer)
           if (stats.errors) cache.errors = stats.errors
           if (stats.warnings) cache.warnings = stats.warnings
           result = JSON.stringify(cache)
