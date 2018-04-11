@@ -98,7 +98,12 @@ describe('StatsWebpackPlugin', function () {
         file1: 'bundle1.js',
         file2: 'bundle2.js'
       }
+      var actualAssetNames = actual.assets.map(function (asset) {
+        return asset.name
+      })
+
       expect(actual.assetsByChunkName).to.deep.equal(expectedAssetsByChunkName)
+      expect(actualAssetNames).to.include.members(['bundle1.js', 'bundle2.js'])
       done()
     })
   })
