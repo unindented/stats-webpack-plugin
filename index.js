@@ -14,12 +14,8 @@ function StatsPlugin (output, options, cache) {
   this.cache = cache
 }
 
-StatsPlugin.prototype.apply = function apply (compiler) {
-  var output = this.output
-  var options = this.options
-  var cache = this.cache
-
-  compiler.plugin('emit', function onEmit (compilation, done) {
+function onEmit (output, options, cache) {
+  return function (compilation, done) {
     var result
 
     compilation.assets[output] = {
@@ -42,7 +38,21 @@ StatsPlugin.prototype.apply = function apply (compiler) {
       }
     }
     done()
-  })
+  }
+}
+
+StatsPlugin.prototype.apply = function apply (compiler) {
+  var output = this.output
+  var options = this.options
+  var cache = this.cache
+
+  var onEmitCallback = onEmit(output, options, cache)
+
+  if (compiler.hooks) {
+    compiler.hooks.emit.tapAsync('StatsPlugin', onEmitCallback)
+  } else {
+    compiler.plugin('emit', onEmitCallback)
+  }
 }
 
 module.exports = StatsPlugin
