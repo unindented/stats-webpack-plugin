@@ -1,3 +1,5 @@
+var fs = require('fs')
+var path = require('path')
 var _ = require('lodash')
 
 /**
@@ -24,17 +26,28 @@ function onEmit (output, options, cache) {
       },
       source: function getSource () {
         var stats = compilation.getStats().toJson(options)
+        var files = options.merge
         var result
 
         if (cache) {
           cache = _.merge(cache, stats)
           if (stats.errors) cache.errors = stats.errors
           if (stats.warnings) cache.warnings = stats.warnings
-          result = JSON.stringify(cache)
+          result = cache
         } else {
-          result = JSON.stringify(stats)
+          result = stats
         }
-        return result
+
+        if (files) {
+          files = typeof files === 'string' ? [files] : files
+          files.forEach(function (file) {
+            var targetPath = path.resolve(compilation.options.output.path, file)
+            var otherStats = fs.readFileSync(targetPath, 'utf8')
+
+            result = _.merge(JSON.parse(otherStats), result)
+          })
+        }
+        return JSON.stringify(result)
       }
     }
     done()

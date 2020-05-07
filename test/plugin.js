@@ -64,6 +64,64 @@ var multiCompilerOptions = (cache) => [{
   ]
 }]
 
+var multiStatsCompilerOptions = [{
+  entry: {
+    file1: inputFile
+  },
+
+  output: {
+    path: outputFolder,
+    filename: 'bundle1.js'
+  },
+
+  profile: true,
+
+  plugins: [
+    new StatsPlugin('bundle1-stats.json', options)
+  ]
+}, {
+  entry: {
+    file2: inputFile
+  },
+
+  output: {
+    path: outputFolder,
+    filename: 'bundle2.js'
+  },
+
+  profile: true,
+
+  plugins: [
+    new StatsPlugin('bundle2-stats.json', options)
+  ]
+}]
+
+var mergeStatsCompilerOptions = {
+  entry: {
+    app: inputFile
+  },
+
+  output: {
+    path: outputFolder,
+    filename: 'app.js'
+  },
+
+  profile: true,
+
+  plugins: [
+    new StatsPlugin(
+      'stats.json',
+      Object.assign({
+        merge: [
+          'bundle1-stats.json',
+          'bundle2-stats.json'
+        ]
+      },
+      options)
+    )
+  ]
+}
+
 describe('StatsWebpackPlugin', function () {
   beforeEach(function () {
     rimraf.sync(outputFolder)
@@ -100,6 +158,28 @@ describe('StatsWebpackPlugin', function () {
       }
       expect(actual.assetsByChunkName).to.deep.equal(expectedAssetsByChunkName)
       done()
+    })
+  })
+
+  it('support to merge multiple `stats.json` files', function (done) {
+    webpack(multiStatsCompilerOptions).run(function (err) {
+      if (err) {
+        return done(err)
+      }
+      webpack(mergeStatsCompilerOptions).run(function (err) {
+        if (err) {
+          return done(err)
+        }
+        var actual = JSON.parse(fs.readFileSync(outputFile, 'utf8'))
+
+        var expectedAssetsByChunkName = {
+          app: 'app.js',
+          file1: 'bundle1.js',
+          file2: 'bundle2.js'
+        }
+        expect(actual.assetsByChunkName).to.deep.equal(expectedAssetsByChunkName)
+        done()
+      })
     })
   })
 })
